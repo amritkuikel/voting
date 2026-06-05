@@ -7,6 +7,7 @@ export const Route = createFileRoute('/demo/db-chat')({
 })
 
 function App() {
+
   return (
     <div className="flex flex-col h-screen bg-gray-50">
       <ChatArea />

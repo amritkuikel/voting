@@ -21,6 +21,8 @@ function FirstName() {
   )
 }
 
+const app: any = ""
+
 function LastName() {
   const lastName = useStore(store, (state) => state.lastName)
   return (
