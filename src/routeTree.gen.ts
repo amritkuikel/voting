@@ -9,6 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VoteLoginRouteImport } from './routes/vote-login'
+import { Route as VoteRouteImport } from './routes/vote'
+import { Route as ResultsRouteImport } from './routes/results'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
@@ -22,11 +26,39 @@ import { Route as DemoDrizzleRouteImport } from './routes/demo/drizzle'
 import { Route as DemoDbChatApiRouteImport } from './routes/demo/db-chat-api'
 import { Route as DemoDbChatRouteImport } from './routes/demo/db-chat'
 import { Route as DemoBetterAuthRouteImport } from './routes/demo/better-auth'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as DemoSentryTestingRouteImport } from './routes/demo/sentry.testing'
 import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
 import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
+import { Route as ApiElectionVoteRouteImport } from './routes/api/election/vote'
+import { Route as ApiElectionStopRouteImport } from './routes/api/election/stop'
+import { Route as ApiElectionStateRouteImport } from './routes/api/election/state'
+import { Route as ApiElectionStartRouteImport } from './routes/api/election/start'
+import { Route as ApiElectionResultsRouteImport } from './routes/api/election/results'
+import { Route as ApiElectionResetRouteImport } from './routes/api/election/reset'
+import { Route as ApiElectionExportRouteImport } from './routes/api/election/export'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
+const VoteLoginRoute = VoteLoginRouteImport.update({
+  id: '/vote-login',
+  path: '/vote-login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VoteRoute = VoteRouteImport.update({
+  id: '/vote',
+  path: '/vote',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResultsRoute = ResultsRouteImport.update({
+  id: '/results',
+  path: '/results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -92,6 +124,11 @@ const DemoBetterAuthRoute = DemoBetterAuthRouteImport.update({
   path: '/demo/better-auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AdminRoute,
+} as any)
 const DemoSentryTestingRoute = DemoSentryTestingRouteImport.update({
   id: '/demo/sentry/testing',
   path: '/demo/sentry/testing',
@@ -107,6 +144,41 @@ const DemoFormAddressRoute = DemoFormAddressRouteImport.update({
   path: '/demo/form/address',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiElectionVoteRoute = ApiElectionVoteRouteImport.update({
+  id: '/api/election/vote',
+  path: '/api/election/vote',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiElectionStopRoute = ApiElectionStopRouteImport.update({
+  id: '/api/election/stop',
+  path: '/api/election/stop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiElectionStateRoute = ApiElectionStateRouteImport.update({
+  id: '/api/election/state',
+  path: '/api/election/state',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiElectionStartRoute = ApiElectionStartRouteImport.update({
+  id: '/api/election/start',
+  path: '/api/election/start',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiElectionResultsRoute = ApiElectionResultsRouteImport.update({
+  id: '/api/election/results',
+  path: '/api/election/results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiElectionResetRoute = ApiElectionResetRouteImport.update({
+  id: '/api/election/reset',
+  path: '/api/election/reset',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiElectionExportRoute = ApiElectionExportRouteImport.update({
+  id: '/api/election/export',
+  path: '/api/election/export',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -116,6 +188,11 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/results': typeof ResultsRoute
+  '/vote': typeof VoteRoute
+  '/vote-login': typeof VoteLoginRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
   '/demo/better-auth': typeof DemoBetterAuthRoute
   '/demo/db-chat': typeof DemoDbChatRoute
   '/demo/db-chat-api': typeof DemoDbChatApiRoute
@@ -128,6 +205,13 @@ export interface FileRoutesByFullPath {
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/election/export': typeof ApiElectionExportRoute
+  '/api/election/reset': typeof ApiElectionResetRoute
+  '/api/election/results': typeof ApiElectionResultsRoute
+  '/api/election/start': typeof ApiElectionStartRoute
+  '/api/election/state': typeof ApiElectionStateRoute
+  '/api/election/stop': typeof ApiElectionStopRoute
+  '/api/election/vote': typeof ApiElectionVoteRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
   '/demo/sentry/testing': typeof DemoSentryTestingRoute
@@ -135,6 +219,11 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/results': typeof ResultsRoute
+  '/vote': typeof VoteRoute
+  '/vote-login': typeof VoteLoginRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
   '/demo/better-auth': typeof DemoBetterAuthRoute
   '/demo/db-chat': typeof DemoDbChatRoute
   '/demo/db-chat-api': typeof DemoDbChatApiRoute
@@ -147,6 +236,13 @@ export interface FileRoutesByTo {
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/election/export': typeof ApiElectionExportRoute
+  '/api/election/reset': typeof ApiElectionResetRoute
+  '/api/election/results': typeof ApiElectionResultsRoute
+  '/api/election/start': typeof ApiElectionStartRoute
+  '/api/election/state': typeof ApiElectionStateRoute
+  '/api/election/stop': typeof ApiElectionStopRoute
+  '/api/election/vote': typeof ApiElectionVoteRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
   '/demo/sentry/testing': typeof DemoSentryTestingRoute
@@ -155,6 +251,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/results': typeof ResultsRoute
+  '/vote': typeof VoteRoute
+  '/vote-login': typeof VoteLoginRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
   '/demo/better-auth': typeof DemoBetterAuthRoute
   '/demo/db-chat': typeof DemoDbChatRoute
   '/demo/db-chat-api': typeof DemoDbChatApiRoute
@@ -167,6 +268,13 @@ export interface FileRoutesById {
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/election/export': typeof ApiElectionExportRoute
+  '/api/election/reset': typeof ApiElectionResetRoute
+  '/api/election/results': typeof ApiElectionResultsRoute
+  '/api/election/start': typeof ApiElectionStartRoute
+  '/api/election/state': typeof ApiElectionStateRoute
+  '/api/election/stop': typeof ApiElectionStopRoute
+  '/api/election/vote': typeof ApiElectionVoteRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
   '/demo/sentry/testing': typeof DemoSentryTestingRoute
@@ -176,6 +284,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/admin'
+    | '/results'
+    | '/vote'
+    | '/vote-login'
+    | '/admin/dashboard'
     | '/demo/better-auth'
     | '/demo/db-chat'
     | '/demo/db-chat-api'
@@ -188,6 +301,13 @@ export interface FileRouteTypes {
     | '/demo/table'
     | '/demo/tanstack-query'
     | '/api/auth/$'
+    | '/api/election/export'
+    | '/api/election/reset'
+    | '/api/election/results'
+    | '/api/election/start'
+    | '/api/election/state'
+    | '/api/election/stop'
+    | '/api/election/vote'
     | '/demo/form/address'
     | '/demo/form/simple'
     | '/demo/sentry/testing'
@@ -195,6 +315,11 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/admin'
+    | '/results'
+    | '/vote'
+    | '/vote-login'
+    | '/admin/dashboard'
     | '/demo/better-auth'
     | '/demo/db-chat'
     | '/demo/db-chat-api'
@@ -207,6 +332,13 @@ export interface FileRouteTypes {
     | '/demo/table'
     | '/demo/tanstack-query'
     | '/api/auth/$'
+    | '/api/election/export'
+    | '/api/election/reset'
+    | '/api/election/results'
+    | '/api/election/start'
+    | '/api/election/state'
+    | '/api/election/stop'
+    | '/api/election/vote'
     | '/demo/form/address'
     | '/demo/form/simple'
     | '/demo/sentry/testing'
@@ -214,6 +346,11 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/admin'
+    | '/results'
+    | '/vote'
+    | '/vote-login'
+    | '/admin/dashboard'
     | '/demo/better-auth'
     | '/demo/db-chat'
     | '/demo/db-chat-api'
@@ -226,6 +363,13 @@ export interface FileRouteTypes {
     | '/demo/table'
     | '/demo/tanstack-query'
     | '/api/auth/$'
+    | '/api/election/export'
+    | '/api/election/reset'
+    | '/api/election/results'
+    | '/api/election/start'
+    | '/api/election/state'
+    | '/api/election/stop'
+    | '/api/election/vote'
     | '/demo/form/address'
     | '/demo/form/simple'
     | '/demo/sentry/testing'
@@ -234,6 +378,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  ResultsRoute: typeof ResultsRoute
+  VoteRoute: typeof VoteRoute
+  VoteLoginRoute: typeof VoteLoginRoute
   DemoBetterAuthRoute: typeof DemoBetterAuthRoute
   DemoDbChatRoute: typeof DemoDbChatRoute
   DemoDbChatApiRoute: typeof DemoDbChatApiRoute
@@ -246,6 +394,13 @@ export interface RootRouteChildren {
   DemoTableRoute: typeof DemoTableRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiElectionExportRoute: typeof ApiElectionExportRoute
+  ApiElectionResetRoute: typeof ApiElectionResetRoute
+  ApiElectionResultsRoute: typeof ApiElectionResultsRoute
+  ApiElectionStartRoute: typeof ApiElectionStartRoute
+  ApiElectionStateRoute: typeof ApiElectionStateRoute
+  ApiElectionStopRoute: typeof ApiElectionStopRoute
+  ApiElectionVoteRoute: typeof ApiElectionVoteRoute
   DemoFormAddressRoute: typeof DemoFormAddressRoute
   DemoFormSimpleRoute: typeof DemoFormSimpleRoute
   DemoSentryTestingRoute: typeof DemoSentryTestingRoute
@@ -253,6 +408,34 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vote-login': {
+      id: '/vote-login'
+      path: '/vote-login'
+      fullPath: '/vote-login'
+      preLoaderRoute: typeof VoteLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vote': {
+      id: '/vote'
+      path: '/vote'
+      fullPath: '/vote'
+      preLoaderRoute: typeof VoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/results': {
+      id: '/results'
+      path: '/results'
+      fullPath: '/results'
+      preLoaderRoute: typeof ResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -344,6 +527,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoBetterAuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/demo/sentry/testing': {
       id: '/demo/sentry/testing'
       path: '/demo/sentry/testing'
@@ -365,6 +555,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoFormAddressRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/election/vote': {
+      id: '/api/election/vote'
+      path: '/api/election/vote'
+      fullPath: '/api/election/vote'
+      preLoaderRoute: typeof ApiElectionVoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/election/stop': {
+      id: '/api/election/stop'
+      path: '/api/election/stop'
+      fullPath: '/api/election/stop'
+      preLoaderRoute: typeof ApiElectionStopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/election/state': {
+      id: '/api/election/state'
+      path: '/api/election/state'
+      fullPath: '/api/election/state'
+      preLoaderRoute: typeof ApiElectionStateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/election/start': {
+      id: '/api/election/start'
+      path: '/api/election/start'
+      fullPath: '/api/election/start'
+      preLoaderRoute: typeof ApiElectionStartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/election/results': {
+      id: '/api/election/results'
+      path: '/api/election/results'
+      fullPath: '/api/election/results'
+      preLoaderRoute: typeof ApiElectionResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/election/reset': {
+      id: '/api/election/reset'
+      path: '/api/election/reset'
+      fullPath: '/api/election/reset'
+      preLoaderRoute: typeof ApiElectionResetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/election/export': {
+      id: '/api/election/export'
+      path: '/api/election/export'
+      fullPath: '/api/election/export'
+      preLoaderRoute: typeof ApiElectionExportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -375,9 +614,23 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminDashboardRoute: typeof AdminDashboardRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminDashboardRoute: AdminDashboardRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRouteWithChildren,
+  ResultsRoute: ResultsRoute,
+  VoteRoute: VoteRoute,
+  VoteLoginRoute: VoteLoginRoute,
   DemoBetterAuthRoute: DemoBetterAuthRoute,
   DemoDbChatRoute: DemoDbChatRoute,
   DemoDbChatApiRoute: DemoDbChatApiRoute,
@@ -390,6 +643,13 @@ const rootRouteChildren: RootRouteChildren = {
   DemoTableRoute: DemoTableRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiElectionExportRoute: ApiElectionExportRoute,
+  ApiElectionResetRoute: ApiElectionResetRoute,
+  ApiElectionResultsRoute: ApiElectionResultsRoute,
+  ApiElectionStartRoute: ApiElectionStartRoute,
+  ApiElectionStateRoute: ApiElectionStateRoute,
+  ApiElectionStopRoute: ApiElectionStopRoute,
+  ApiElectionVoteRoute: ApiElectionVoteRoute,
   DemoFormAddressRoute: DemoFormAddressRoute,
   DemoFormSimpleRoute: DemoFormSimpleRoute,
   DemoSentryTestingRoute: DemoSentryTestingRoute,

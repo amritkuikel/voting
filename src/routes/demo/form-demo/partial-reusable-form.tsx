@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/correctness/noChildrenProp: <required> */
 import { withFieldGroup } from "@/routes/demo/form-demo/form-hook";
 
 export const PartialReusableForm = withFieldGroup({

@@ -11,16 +11,18 @@
     "preview": "vite preview",
     "test": "vitest run",
     "format": "biome format",
-    "lint": "biome lint",
-    "check": "biome check",
+    "lint": "biome lint --max-diagnostics=1000000",
+    "check": "biome check --write --unsafe --max-diagnostics=1000000",
     "start": "node --import ./.output/server/instrument.server.mjs .output/server/index.mjs",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:pull": "drizzle-kit pull",
     "db:studio": "drizzle-kit studio",
+    "db:init": "tsx scripts/init-db.ts",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "machine-translate": "inlang machine translate --project project.inlang"
   },
   "dependencies": {
     "@faker-js/faker": "^10.3.0",
@@ -67,7 +69,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.5",
-    "@inlang/paraglide-js": "^2.13.1",
+    "@inlang/paraglide-js": "^2.18.2",
     "@rolldown/plugin-babel": "^0.2.3",
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/devtools-event-client": "latest",
@@ -85,7 +87,8 @@
     "tsx": "^4.21.0",
     "typescript": "^6.0.2",
     "vite": "^8.0.0",
-    "vitest": "^4.1.5"
+    "vitest": "^4.1.5",
+    "@inlang/cli": "^3.0.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

@@ -1,3 +1,5 @@
+import { useStore } from "@tanstack/react-form";
+import { XIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -8,9 +10,7 @@ import {
 	FieldSet,
 } from "@/components/ui/field";
 import { useFieldContext } from "@/routes/demo/form-demo/form-provider";
-import { useStore } from "@tanstack/react-form";
 import { PartialReusableForm } from "@/routes/demo/form-demo/partial-reusable-form";
-import { XIcon } from "lucide-react";
 
 export default function SubordinatesInput({
 	label,
@@ -59,8 +59,8 @@ export default function SubordinatesInput({
 				>
 					Add Subordinate
 				</Button>
-				{field.state.value.map((_, index) => (
-					<Card key={index} className="p-2">
+				{field.state.value.map((a, index) => (
+					<Card key={a.email} className="p-2">
 						<PartialReusableForm
 							form={form}
 							fields={

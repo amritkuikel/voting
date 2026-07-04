@@ -7,18 +7,12 @@ const TextInput = lazy(() => import("@/routes/demo/form-demo/text-input"));
 const TextAreaInput = lazy(
 	() => import("@/routes/demo/form-demo/text-area-input"),
 );
-const SelectInput = lazy(
-	() => import("@/routes/demo/form-demo/select-input"),
-);
+const SelectInput = lazy(() => import("@/routes/demo/form-demo/select-input"));
 const CheckboxInput = lazy(
 	() => import("@/routes/demo/form-demo/checkbox-input"),
 );
-const RadioInput = lazy(
-	() => import("@/routes/demo/form-demo/radio-input"),
-);
-const SwitchInput = lazy(
-	() => import("@/routes/demo/form-demo/switch-input"),
-);
+const RadioInput = lazy(() => import("@/routes/demo/form-demo/radio-input"));
+const SwitchInput = lazy(() => import("@/routes/demo/form-demo/switch-input"));
 const SubordinatesInput = lazy(
 	() => import("@/routes/demo/form-demo/subordinates"),
 );

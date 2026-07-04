@@ -1,7 +1,7 @@
-import { useAppForm } from "@/routes/demo/form-demo/form-hook";
-import { PartialForm } from "@/routes/demo/form-demo/partial-form";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { FieldGroup } from "@/components/ui/field";
+import { useAppForm } from "@/routes/demo/form-demo/form-hook";
+import { PartialForm } from "@/routes/demo/form-demo/partial-form";
 import { testFormOptions } from "./options";
 export default function TestForm() {
 	const form = useAppForm({
