@@ -14,7 +14,7 @@ export const Route = createFileRoute('/api/election/reset')({
 					// Reset all vote counts
 					await client`
 						UPDATE candidates
-						SET vote_count = 0
+						SET "voteCount" = 0
 					`;
 
 					// Delete all votes
@@ -25,11 +25,11 @@ export const Route = createFileRoute('/api/election/reset')({
 					// Reset election state
 					await client`
 						UPDATE election_state
-						SET is_active = false,
-							total_votes = 0,
-							started_at = NULL,
-							stopped_at = NULL,
-							updated_at = CURRENT_TIMESTAMP
+						SET "isActive" = false,
+							"totalVotes" = 0,
+							"startedAt" = NULL,
+							"stoppedAt" = NULL,
+							"updatedAt" = CURRENT_TIMESTAMP
 						WHERE id = (SELECT id FROM election_state ORDER BY id DESC LIMIT 1)
 					`;
 

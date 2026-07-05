@@ -20,7 +20,7 @@ export const Route = createFileRoute('/api/election/state')({
 					if (!result || result.length === 0) {
 						// Initialize election state
 						await client`
-							INSERT INTO election_state (is_active, total_votes)
+							INSERT INTO election_state ("isActive", "totalVotes")
 							VALUES (false, 0)
 						`;
 						const newState = (await client`

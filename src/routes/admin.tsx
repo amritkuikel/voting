@@ -25,17 +25,15 @@ function AdminLogin() {
 	// Single admin credential
 	const ADMIN_PASSWORD = 'admin2083';
 
-	const handleSubmit = async (e: React.FormEvent) => {
+	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		setIsLoading(true);
 		setError('');
 
 		if (password === ADMIN_PASSWORD) {
 			localStorage.setItem('admin_session', 'true');
-			// Small delay to ensure localStorage is set
-			setTimeout(() => {
-				window.location.href = '/admin/dashboard';
-			}, 100);
+			// Use window.location for immediate page reload
+			window.location.href = '/admin-dashboard';
 		} else {
 			setError('Invalid password');
 			setIsLoading(false);
@@ -74,7 +72,7 @@ function AdminLogin() {
 					{error && (
 						<div className="bg-red-50 border-2 border-red-200 text-red-700 px-4 py-3 rounded-xl flex items-center gap-2">
 							<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12 a9 9 0 11-18 0 9 9 0 0118 0z" />
 							</svg>
 							{error}
 						</div>
@@ -98,7 +96,6 @@ function AdminLogin() {
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
 						</svg>
 						Back to Home
-					
 					</button>
 				</div>
 			</div>

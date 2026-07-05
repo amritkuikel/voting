@@ -34,7 +34,7 @@ function Results() {
 			const response = await fetch('/api/election/results');
 			const data = await response.json();
 			setCandidates(data.candidates || []);
-			setTotalVotes(data.electionState?.total_votes || 0);
+			setTotalVotes(data.electionState?.totalVotes || 0);
 			setLastUpdate(new Date());
 		} catch (error) {
 			console.error('Failed to fetch results:', error);
@@ -46,12 +46,12 @@ function Results() {
 
 	const getLeader = (candidateList: any[]) => {
 		if (candidateList.length === 0) return null;
-		return candidateList.reduce((max, c) => (c.vote_count > max.vote_count ? c : max));
+		return candidateList.reduce((max, c) => (c.voteCount > max.voteCount ? c : max));
 	};
 
 	const renderCandidateCard = (candidate: any, isLeader: boolean) => {
-		const maxVotes = Math.max(...candidates.map((c) => c.vote_count || 0), 1);
-		const percentage = ((candidate.vote_count || 0) / maxVotes) * 100;
+		const maxVotes = Math.max(...candidates.map((c) => c.voteCount || 0), 1);
+		const percentage = ((candidate.voteCount || 0) / maxVotes) * 100;
 
 		return (
 			<div
@@ -64,7 +64,7 @@ function Results() {
 			>
 				<div className="flex items-center gap-4">
 					<img
-						src={`/images/${candidate.photo_image}`}
+						src={`/images/${candidate.photoImage}`}
 						alt={candidate.name}
 						className="w-16 h-16 object-cover rounded-full"
 					/>
@@ -80,7 +80,7 @@ function Results() {
 					</div>
 					<div className="text-right">
 						<p className="text-2xl font-bold text-blue-600">
-							{candidate.vote_count || 0}
+							{candidate.voteCount || 0}
 						</p>
 						{isLeader && (
 							<span className="text-xs font-bold text-yellow-600">👑 Leader</span>

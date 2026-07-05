@@ -34,7 +34,7 @@ export const Route = createFileRoute('/api/election/vote')({
 						return Response.json({ error: 'Election not initialized. Please contact admin.' }, { status: 400 });
 					}
 
-					if (!electionResult[0].is_active) {
+					if (!electionResult[0].isActive) {
 						return Response.json({ error: 'Election is not active. Please contact admin to start the election.' }, { status: 400 });
 					}
 
@@ -51,22 +51,22 @@ export const Route = createFileRoute('/api/election/vote')({
 
 					// Insert the complete vote (no partial votes)
 					await client`
-						INSERT INTO votes (head_boy_candidate_id, head_girl_candidate_id, selected_house, house_captain_candidate_id)
+						INSERT INTO votes ("headBoyCandidateId", "headGirlCandidateId", "selectedHouse", "houseCaptainCandidateId")
 						VALUES (${headBoyCandidateId}, ${headGirlCandidateId}, ${selectedHouse}, ${houseCaptainCandidateId})
 					`;
 
 					// Update vote counts for all selected candidates
 					await client`
 						UPDATE candidates
-						SET vote_count = vote_count + 1
+						SET "voteCount" = "voteCount" + 1
 						WHERE id IN (${headBoyCandidateId}, ${headGirlCandidateId}, ${houseCaptainCandidateId})
 					`;
 
 					// Update total votes
 					await client`
 						UPDATE election_state
-						SET total_votes = total_votes + 1,
-							updated_at = CURRENT_TIMESTAMP
+						SET "totalVotes" = "totalVotes" + 1,
+							"updatedAt" = CURRENT_TIMESTAMP
 						WHERE id = (SELECT id FROM election_state ORDER BY id DESC LIMIT 1)
 					`;
 

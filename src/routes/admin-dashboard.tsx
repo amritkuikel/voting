@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useState, useEffect } from 'react';
 
-export const Route = createFileRoute('/admin/dashboard')({
+export const Route = createFileRoute('/admin-dashboard')({
 	component: AdminDashboard,
 	head: () => ({
 		meta: [
@@ -132,17 +132,17 @@ function AdminDashboard() {
 								Election Status
 							</h2>
 							<p className="text-lg text-gray-600">
-								Total Votes: <span className="font-bold text-blue-600">{electionState?.total_votes || 0}</span>
+								Total Votes: <span className="font-bold text-blue-600">{electionState?.totalVotes || 0}</span>
 							</p>
 						</div>
 						<div
 							className={`px-8 py-4 rounded-2xl text-2xl font-bold ${
-								electionState?.is_active
+								electionState?.isActive
 									? 'bg-green-100 text-green-700'
 									: 'bg-red-100 text-red-700'
 							}`}
 						>
-							{electionState?.is_active ? 'ACTIVE' : 'STOPPED'}
+							{electionState?.isActive ? 'ACTIVE' : 'STOPPED'}
 						</div>
 					</div>
 				</div>
@@ -151,14 +151,14 @@ function AdminDashboard() {
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
 					<button
 						onClick={() => setShowConfirm('start')}
-						disabled={electionState?.is_active || isLoading}
+						disabled={electionState?.isActive || isLoading}
 						className="px-6 py-8 bg-green-600 hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-xl font-bold rounded-2xl shadow-lg transition-all transform hover:scale-105 disabled:hover:scale-100"
 					>
 						Start Election
 					</button>
 					<button
 						onClick={() => setShowConfirm('stop')}
-						disabled={!electionState?.is_active || isLoading}
+						disabled={!electionState?.isActive || isLoading}
 						className="px-6 py-8 bg-red-600 hover:bg-red-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-xl font-bold rounded-2xl shadow-lg transition-all transform hover:scale-105 disabled:hover:scale-100"
 					>
 						Stop Election

@@ -13,9 +13,9 @@ export const Route = createFileRoute('/api/election/stop')({
 				try {
 					await client`
 						UPDATE election_state
-						SET is_active = false,
-							stopped_at = CURRENT_TIMESTAMP,
-							updated_at = CURRENT_TIMESTAMP
+						SET "isActive" = false,
+							"stoppedAt" = CURRENT_TIMESTAMP,
+							"updatedAt" = CURRENT_TIMESTAMP
 						WHERE id = (SELECT id FROM election_state ORDER BY id DESC LIMIT 1)
 					`;
 
