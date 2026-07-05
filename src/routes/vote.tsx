@@ -34,7 +34,7 @@ function Vote() {
 	// Check if user is logged in
 	useEffect(() => {
 		if (localStorage.getItem('voting_session') !== 'true') {
-			navigate({ to: '/vote-login' });
+			navigate({ to: '/vote' });
 		}
 	}, [navigate]);
 
@@ -108,7 +108,7 @@ function Vote() {
 			houseSelection: null,
 			houseCaptainSelection: null,
 		});
-		navigate({ to: '/vote-login' });
+		navigate({ to: '/vote' });
 	};
 
 	const canProceed = () => {
