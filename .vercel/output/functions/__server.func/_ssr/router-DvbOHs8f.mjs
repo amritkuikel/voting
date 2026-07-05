@@ -447,47 +447,90 @@ var Route$2 = createFileRoute("/api/election/reset")({ server: { handlers: { POS
 		return Response.json({ error: "Failed to reset election" }, { status: 500 });
 	}
 } } } });
+async function executeQuery(client, query) {
+	if (typeof client.query === "function") return client.query(query);
+	if (typeof client === "function") return client(query);
+	throw new Error("Unsupported database client");
+}
+async function getVoteColumnSet(client) {
+	if ((await executeQuery(client, `
+		SELECT column_name
+		FROM information_schema.columns
+		WHERE table_schema = current_schema()
+			AND table_name = 'votes'
+	`)).map((column) => column.column_name ?? column.COLUMN_NAME ?? column.columnName).filter(Boolean).includes("headBoyCandidateId")) return {
+		idColumn: "id",
+		headBoyColumn: "\"headBoyCandidateId\"",
+		headGirlColumn: "\"headGirlCandidateId\"",
+		selectedHouseColumn: "\"selectedHouse\"",
+		houseCaptainColumn: "\"houseCaptainCandidateId\"",
+		votedAtColumn: "\"votedAt\""
+	};
+	return {
+		idColumn: "id",
+		headBoyColumn: "head_boy_candidate_id",
+		headGirlColumn: "head_girl_candidate_id",
+		selectedHouseColumn: "selected_house",
+		houseCaptainColumn: "house_captain_candidate_id",
+		votedAtColumn: "voted_at"
+	};
+}
+function escapeCsvValue(value) {
+	if (value === null || value === void 0) return "";
+	const stringValue = String(value);
+	if (/[",\n]/.test(stringValue)) return `"${stringValue.replace(/"/g, "\"\"")}"`;
+	return stringValue;
+}
+function getRowValue(row, keys) {
+	for (const key of keys) if (row[key] !== void 0) return row[key];
+	return "";
+}
+async function getElectionExportResponse(client) {
+	const columns = await getVoteColumnSet(client);
+	const votes = await executeQuery(client, `
+		SELECT
+			v.id AS id,
+			v.${columns.headBoyColumn} AS head_boy_candidate_id,
+			hb.name AS head_boy_name,
+			v.${columns.headGirlColumn} AS head_girl_candidate_id,
+			hg.name AS head_girl_name,
+			v.${columns.selectedHouseColumn} AS selected_house,
+			v.${columns.houseCaptainColumn} AS house_captain_candidate_id,
+			hc.name AS house_captain_name,
+			v.${columns.votedAtColumn} AS voted_at
+		FROM votes v
+		JOIN candidates hb ON v.${columns.headBoyColumn} = hb.id
+		JOIN candidates hg ON v.${columns.headGirlColumn} = hg.id
+		JOIN candidates hc ON v.${columns.houseCaptainColumn} = hc.id
+		ORDER BY v.${columns.votedAtColumn} DESC
+	`);
+	const csv = [[
+		"Vote ID",
+		"Head Boy",
+		"Head Girl",
+		"Selected House",
+		"House Captain",
+		"Voted At"
+	].map(escapeCsvValue).join(","), ...votes.map((vote) => [
+		getRowValue(vote, ["id"]),
+		getRowValue(vote, ["head_boy_name", "headBoyName"]),
+		getRowValue(vote, ["head_girl_name", "headGirlName"]),
+		getRowValue(vote, ["selected_house", "selectedHouse"]),
+		getRowValue(vote, ["house_captain_name", "houseCaptainName"]),
+		getRowValue(vote, ["voted_at", "votedAt"])
+	].map(escapeCsvValue).join(","))].join("\n");
+	return new Response(csv, { headers: {
+		"Content-Type": "text/csv; charset=utf-8",
+		"Content-Disposition": "attachment; filename=election_results.csv"
+	} });
+}
 var Route$1 = createFileRoute("/api/election/export")({ server: { handlers: { GET: async () => {
 	const client = await getClient();
 	if (!client) return Response.json({ error: "Database not available" }, { status: 500 });
 	try {
-		const votes = await client`
-						SELECT 
-							v.id,
-							v.head_boy_candidate_id,
-							hb.name as head_boy_name,
-							v.head_girl_candidate_id,
-							hg.name as head_girl_name,
-							v.selected_house,
-							v.house_captain_candidate_id,
-							hc.name as house_captain_name,
-							v.voted_at
-						FROM votes v
-						JOIN candidates hb ON v.head_boy_candidate_id = hb.id
-						JOIN candidates hg ON v.head_girl_candidate_id = hg.id
-						JOIN candidates hc ON v.house_captain_candidate_id = hc.id
-						ORDER BY v.voted_at DESC
-					`;
-		const csv = [[
-			"Vote ID",
-			"Head Boy",
-			"Head Girl",
-			"Selected House",
-			"House Captain",
-			"Voted At"
-		].join(","), ...votes.map((vote) => [
-			vote.id,
-			vote.head_boy_name,
-			vote.head_girl_name,
-			vote.selected_house,
-			vote.house_captain_name,
-			vote.voted_at
-		].join(","))].join("\n");
-		return new Response(csv, { headers: {
-			"Content-Type": "text/csv",
-			"Content-Disposition": "attachment; filename=election_results.csv"
-		} });
+		return await getElectionExportResponse(client);
 	} catch (error) {
+		console.error("Failed to export results", error);
 		return Response.json({ error: "Failed to export results" }, { status: 500 });
 	}
 } } } });
