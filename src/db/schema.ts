@@ -29,3 +29,10 @@ export const electionState = pgTable("election_state", {
 	stoppedAt: timestamp("stopped_at"),
 	updatedAt: timestamp("updated_at").defaultNow(),
 });
+
+export const todos = pgTable("todos", {
+	id: serial().primaryKey(),
+	title: text().notNull(),
+	createdAt: timestamp("created_at").defaultNow(),
+	updatedAt: timestamp("updated_at").defaultNow(),
+});
