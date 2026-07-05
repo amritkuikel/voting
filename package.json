@@ -66,6 +66,7 @@
     "tailwindcss": "^4.1.18",
     "tw-animate-css": "^1.3.6",
     "vite-plugin-neon-new": "^0.8.0",
+    "youch": "^4.1.1",
     "zod": "^4.3.6"
   },
   "devDependencies": {
