@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import BetterAuthHeader from "../integrations/better-auth/header-user.tsx";
-import ParaglideLocaleSwitcher from "./LocaleSwitcher.tsx";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
@@ -156,7 +155,6 @@ export default function Header() {
 							/>
 						</svg>
 					</a>
-					<ParaglideLocaleSwitcher />
 					<BetterAuthHeader />
 
 					<ThemeToggle />

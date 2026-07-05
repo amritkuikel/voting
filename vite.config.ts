@@ -1,4 +1,3 @@
-import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import babel from "@rolldown/plugin-babel";
 import { sentryTanstackStart } from "@sentry/tanstackstart-react/vite";
 import tailwindcss from "@tailwindcss/vite";
@@ -15,19 +14,7 @@ const config = defineConfig(({ mode }) => {
 		resolve: { tsconfigPaths: true },
 		plugins: [
 			devtools(),
-			paraglideVitePlugin({
-				project: "./project.inlang",
-				outdir: "./app/paraglide",
-				outputStructure: "message-modules",
-				cookieName: "PARAGLIDE_LOCALE",
-				strategy: ["url", "cookie", "preferredLanguage", "baseLocale"],
-				urlPatterns: [
-					{
-						pattern: "/:path(.*)?",
-						localized: [["en", "/en/:path(.*)?"]],
-					},
-				],
-			}),
+			
 			nitro({ rollupConfig: { external: [/^@sentry\//] } }),
 			neon,
 			tailwindcss(),

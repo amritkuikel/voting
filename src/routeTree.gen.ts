@@ -22,7 +22,6 @@ import { Route as DemoStorybookRouteImport } from './routes/demo/storybook'
 import { Route as DemoStoreRouteImport } from './routes/demo/store'
 import { Route as DemoPosthogRouteImport } from './routes/demo/posthog'
 import { Route as DemoNeonRouteImport } from './routes/demo/neon'
-import { Route as DemoI18nRouteImport } from './routes/demo.i18n'
 import { Route as DemoDrizzleRouteImport } from './routes/demo/drizzle'
 import { Route as DemoDbChatApiRouteImport } from './routes/demo/db-chat-api'
 import { Route as DemoDbChatRouteImport } from './routes/demo/db-chat'
@@ -102,11 +101,6 @@ const DemoPosthogRoute = DemoPosthogRouteImport.update({
 const DemoNeonRoute = DemoNeonRouteImport.update({
   id: '/demo/neon',
   path: '/demo/neon',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoI18nRoute = DemoI18nRouteImport.update({
-  id: '/demo/i18n',
-  path: '/demo/i18n',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoDrizzleRoute = DemoDrizzleRouteImport.update({
@@ -197,7 +191,6 @@ export interface FileRoutesByFullPath {
   '/demo/db-chat': typeof DemoDbChatRoute
   '/demo/db-chat-api': typeof DemoDbChatApiRoute
   '/demo/drizzle': typeof DemoDrizzleRoute
-  '/demo/i18n': typeof DemoI18nRoute
   '/demo/neon': typeof DemoNeonRoute
   '/demo/posthog': typeof DemoPosthogRoute
   '/demo/store': typeof DemoStoreRoute
@@ -228,7 +221,6 @@ export interface FileRoutesByTo {
   '/demo/db-chat': typeof DemoDbChatRoute
   '/demo/db-chat-api': typeof DemoDbChatApiRoute
   '/demo/drizzle': typeof DemoDrizzleRoute
-  '/demo/i18n': typeof DemoI18nRoute
   '/demo/neon': typeof DemoNeonRoute
   '/demo/posthog': typeof DemoPosthogRoute
   '/demo/store': typeof DemoStoreRoute
@@ -260,7 +252,6 @@ export interface FileRoutesById {
   '/demo/db-chat': typeof DemoDbChatRoute
   '/demo/db-chat-api': typeof DemoDbChatApiRoute
   '/demo/drizzle': typeof DemoDrizzleRoute
-  '/demo/i18n': typeof DemoI18nRoute
   '/demo/neon': typeof DemoNeonRoute
   '/demo/posthog': typeof DemoPosthogRoute
   '/demo/store': typeof DemoStoreRoute
@@ -293,7 +284,6 @@ export interface FileRouteTypes {
     | '/demo/db-chat'
     | '/demo/db-chat-api'
     | '/demo/drizzle'
-    | '/demo/i18n'
     | '/demo/neon'
     | '/demo/posthog'
     | '/demo/store'
@@ -324,7 +314,6 @@ export interface FileRouteTypes {
     | '/demo/db-chat'
     | '/demo/db-chat-api'
     | '/demo/drizzle'
-    | '/demo/i18n'
     | '/demo/neon'
     | '/demo/posthog'
     | '/demo/store'
@@ -355,7 +344,6 @@ export interface FileRouteTypes {
     | '/demo/db-chat'
     | '/demo/db-chat-api'
     | '/demo/drizzle'
-    | '/demo/i18n'
     | '/demo/neon'
     | '/demo/posthog'
     | '/demo/store'
@@ -387,7 +375,6 @@ export interface RootRouteChildren {
   DemoDbChatRoute: typeof DemoDbChatRoute
   DemoDbChatApiRoute: typeof DemoDbChatApiRoute
   DemoDrizzleRoute: typeof DemoDrizzleRoute
-  DemoI18nRoute: typeof DemoI18nRoute
   DemoNeonRoute: typeof DemoNeonRoute
   DemoPosthogRoute: typeof DemoPosthogRoute
   DemoStoreRoute: typeof DemoStoreRoute
@@ -498,13 +485,6 @@ declare module '@tanstack/react-router' {
       path: '/demo/neon'
       fullPath: '/demo/neon'
       preLoaderRoute: typeof DemoNeonRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/i18n': {
-      id: '/demo/i18n'
-      path: '/demo/i18n'
-      fullPath: '/demo/i18n'
-      preLoaderRoute: typeof DemoI18nRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo/drizzle': {
@@ -627,7 +607,6 @@ const rootRouteChildren: RootRouteChildren = {
   DemoDbChatRoute: DemoDbChatRoute,
   DemoDbChatApiRoute: DemoDbChatApiRoute,
   DemoDrizzleRoute: DemoDrizzleRoute,
-  DemoI18nRoute: DemoI18nRoute,
   DemoNeonRoute: DemoNeonRoute,
   DemoPosthogRoute: DemoPosthogRoute,
   DemoStoreRoute: DemoStoreRoute,
