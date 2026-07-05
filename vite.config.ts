@@ -13,6 +13,7 @@ const config = defineConfig(({ mode }) => {
 		resolve: { tsconfigPaths: true },
 		plugins: [
 			devtools(),
+			nitro({ preset: "vercel" }),
 			neon,
 			tailwindcss(),
 			tanstackStart(),

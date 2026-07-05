@@ -1,0 +1,1 @@
+var e=[`blue`,`yellow`,`red`,`green`],t={blue:`bg-blue-500`,yellow:`bg-yellow-500`,red:`bg-red-500`,green:`bg-green-500`},n={blue:`Blue House`,yellow:`Yellow House`,red:`Red House`,green:`Green House`};export{t as n,n as r,e as t};
