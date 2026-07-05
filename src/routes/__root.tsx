@@ -9,7 +9,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import PostHogProvider from "../integrations/posthog/provider";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import StoreDevtools from "../lib/demo-store-devtools";
-import appCss from "../styles.css?url";
+import "../styles.css";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
@@ -96,10 +96,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 			},
 		],
 		links: [
-			{
-				rel: "stylesheet",
-				href: appCss,
-			},
 			{
 				rel: "icon",
 				type: "image/png",
