@@ -23,7 +23,6 @@ const translations = {
 		electionTitle: "Student Council Election 2083",
 		startVoting: "START VOTING",
 		adminLogin: "ADMIN LOGIN",
-		demoInfo: "Admin: admin2083 | Voting: vote1-vote10",
 		language: "नेपाली",
 	},
 	ne: {
@@ -32,7 +31,6 @@ const translations = {
 		electionTitle: "विद्यार्थी परिषद निर्वाचन २०८३",
 		startVoting: "मतदान सुरु गर्नुहोस्",
 		adminLogin: "प्रशासक लगइन",
-		demoInfo: "प्रशासक: admin2083 | मतदान: vote1-vote10",
 		language: "English",
 	},
 };
@@ -103,12 +101,7 @@ function Home() {
 					</Link>
 				</div>
 
-				{/* Demo Info */}
-				<div className="mt-8 p-4 bg-indigo-50 rounded-xl border border-indigo-200 animate-in fade-in duration-1000 delay-500">
-					<p className="text-sm text-indigo-800 font-semibold">
-						🗳️ {t.demoInfo}
-					</p>
-				</div>
+				
 			</div>
 		</div>
 	);
