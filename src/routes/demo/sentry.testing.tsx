@@ -7,7 +7,17 @@
  */
 
 import * as fs from "node:fs/promises";
-import * as Sentry from "@sentry/tanstackstart-react";
+const Sentry = {
+	init: () => {},
+	captureException: () => {},
+	setContext: () => {},
+	startSpan: async (_name: string, callback: () => unknown | Promise<unknown>) => {
+		if (typeof callback === "function") {
+			return await callback();
+		}
+		return callback;
+	},
+};
 import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
